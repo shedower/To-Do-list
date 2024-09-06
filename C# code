@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic; 
+
+class Program
+{
+    static void Main()
+    {
+        List<string> tasks = new List<string>();
+        bool done = false;
+
+        while (!done)
+        {
+            Console.WriteLine("A - Checking tasks\nB - Adding tasks\nC - Removing tasks\nD - Exit");
+            char answer = Convert.ToChar(Console.ReadLine().ToUpper());
+
+            if (answer == 'A')
+            {
+                Console.WriteLine("Here are your tasks:");
+                for (int i = 0; i < tasks.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {tasks[i]}");
+                }
+            }
+            else if (answer == 'B')
+            {
+                Console.WriteLine("Write your new task:");
+                string newTask = Console.ReadLine();
+                tasks.Add(newTask);
+                Console.WriteLine($"Task '{newTask}' has been added.");
+            }
+            else if (answer == 'C')
+            {
+                Console.WriteLine("Enter the number of the task to remove:");
+                int taskNumber;
+                if (int.TryParse(Console.ReadLine(), out taskNumber) && taskNumber > 0 && taskNumber <= tasks.Count)
+                {
+                    string removedTask = tasks[taskNumber - 1];
+                    tasks.RemoveAt(taskNumber - 1);
+                    Console.WriteLine($"Task '{removedTask}' has been removed.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid task number.");
+                }
+            }
+            else if (answer == 'D')
+            {
+                done = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid option. Please choose A, B, C, or D.");
+            }
+        }
+    }
+}
